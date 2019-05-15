@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragments/layout" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new product</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/save" method="post"
+                  autocomplete="off" class="form-horizontal">
+                <input type="hidden" name="id">
+                <input type="hidden" name="_token" value="ueLNYcgVay9rj3UwsHFnnw0yK5T01sHpKEjnk3Qu">
+                <div class="card ">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Add new product</h4>
+                        <p class="card-category">Product information</p>
+                    </div>
+                    <div class="card-body ">
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="name" id="name" type="text"
+                                           placeholder="Name" required="true" aria-required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Price</label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="price" id="price" type="text"
+                                           placeholder="Price" required="true" aria-required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Details</label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="details" id="details"
+                                              placeholder="Product details..." required="true"
+                                              aria-required="true" th:rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer ml-auto mr-auto">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

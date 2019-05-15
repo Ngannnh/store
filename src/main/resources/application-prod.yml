@@ -1,0 +1,23 @@
+# ===============================
+# DATABASE CONNECTION
+# ===============================
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: postgres://ndvbqdqrmkqpaz:fdab496d3f2954a43c3e3d128e58880a1bac2fc1d15e1d5efbbb7a6946ee8024@ec2-54-197-234-117.compute-1.amazonaws.com:5432/dshd0parfijfp
+    username: ndvbqdqrmkqpaz
+    password: fdab496d3f2954a43c3e3d128e58880a1bac2fc1d15e1d5efbbb7a6946ee8024
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+server:
+  port: 1609
+
+
+

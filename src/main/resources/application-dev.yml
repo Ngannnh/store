@@ -1,0 +1,23 @@
+# ===============================
+# DATABASE CONNECTION
+# ===============================
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:4502/mydatabase
+    username: postgres
+    password: 123456
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+server:
+  port: 1609
+
+
+
