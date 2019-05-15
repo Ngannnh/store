@@ -25,7 +25,7 @@ public class ProductController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
     private static ProductRepository productRepository;
 
-    @Value("${spring.datasource.driver-class-name.org.postgresql.Driver.url}") private String dbURL;
+    @Value("${spring.datasource.url}") private String dbURL;
 
     @PostConstruct public void init() {
         LOGGER.info("DATABASE URL::" + dbURL);
