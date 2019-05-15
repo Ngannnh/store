@@ -5,6 +5,7 @@ import ngocngan.store.repository.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @author ngan nnh on 5/13/2019
@@ -22,12 +25,18 @@ public class ProductController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
     private static ProductRepository productRepository;
 
+    @Value("${spring.datasource.driver-class-name.org.postgresql.Driver.url}") private String dbURL;
+
+    @PostConstruct public void init() {
+        LOGGER.info("DATABASE URL::" + dbURL);
+    }
+
     @Autowired public ProductController(ProductRepository productRepository) {
         ProductController.productRepository = productRepository;
     }
 
     @RequestMapping(value = { "/products" }, method = RequestMethod.GET) public String products(Model model) {
-        model.addAttribute("products",productRepository.findAll());
+        model.addAttribute("products", productRepository.findAll());
         return "product/products";
     }
 
