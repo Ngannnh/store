@@ -29,7 +29,13 @@
                                 Name
                             </th>
                             <th>
-                                Price
+                                Price In
+                            </th>
+                            <th>
+                                Price Out
+                            </th>
+                            <th>
+                                Image
                             </th>
                             <th class="text-right">
                                 Actions
@@ -38,7 +44,12 @@
                             <tbody>
                             <tr th:each="product:${products}">
                                 <td th:text="${product.getName()}"></td>
-                                <td th:text="${product.getPrice()}"></td>
+                                <td th:text="${product.getPriceIn()}"></td>
+                                <td th:text="${product.getPriceOut()}"></td>
+                                <td>
+                                    <img th:src="${product.getImagePath()}"
+                                         alt="" width="30px" height="30px">
+                                </td>
                                 <td class="td-actions text-right">
                                     <a rel="tooltip" class="btn btn-success btn-link"
                                        th:href="@{'/product-details/'+${product.getId()}}"

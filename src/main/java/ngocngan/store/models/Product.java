@@ -11,17 +11,22 @@ import javax.persistence.*;
 public class Product {
     @Id @GeneratedValue @Column(name = "id") private Integer id;
     private String name;
-    private int price;
+    private float priceIn;
+    private float priceOut;
     private String details;
+    private String imagePath;
 
     public Product() {
     }
 
-    public Product(String name, int price, String details) {
+    public Product(String name, float priceIn, float priceOut, String details, String imagePath) {
         this.name = name;
-        this.price = price;
+        this.priceIn = priceIn;
+        this.priceOut = priceOut;
         this.details = details;
+        this.imagePath = imagePath;
     }
+
     public String getName() {
         return name;
     }
@@ -30,12 +35,28 @@ public class Product {
         this.name = name;
     }
 
-    public int getPrice() {
-        return price;
+    public float getPriceIn() {
+        return priceIn;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setPriceIn(float priceIn) {
+        this.priceIn = priceIn;
+    }
+
+    public float getPriceOut() {
+        return priceOut;
+    }
+
+    public void setPriceOut(float priceOut) {
+        this.priceOut = priceOut;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String getDetails() {

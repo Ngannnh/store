@@ -6,4 +6,5 @@ package ngocngan.store.controller;
  */
 
 public class UserController {
+
 }

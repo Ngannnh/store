@@ -33,11 +33,21 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-sm-2 col-form-label">Price</label>
+                            <label class="col-sm-2 col-form-label">Price In</label>
                             <div class="col-sm-7">
                                 <div class="form-group">
-                                    <input class="form-control" name="price" id="price" type="text"
-                                           placeholder="Price" th:value="${product.getPrice()}" required="true"
+                                    <input class="form-control" name="priceIn" id="priceIn" type="number"
+                                           placeholder="Price In" th:value="${product.getPriceIn()}" required="true"
+                                           aria-required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Price Out</label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="priceOut" id="priceOut" type="number"
+                                           placeholder="Price Out" th:value="${product.getPriceOut()}" required="true"
                                            aria-required="true"/>
                                 </div>
                             </div>
@@ -49,6 +59,16 @@
                                     <textarea class="form-control" name="details" id="details" required="true"
                                               placeholder="Product details..." th:text="${product.getDetails()}"
                                               aria-required="true" th:rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Image Path</label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="imagePath" id="imagePath" type="text"
+                                           placeholder="Image Path" th:value="${product.getImagePath()}" required="true"
+                                           aria-required="true"/>
                                 </div>
                             </div>
                         </div>

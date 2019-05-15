@@ -29,7 +29,7 @@
                                            aria-required="true" readonly/>
                                 </div>
                             </div>
-                            <a th:href="@{'/product-update/'+${product.getId()}}" >
+                            <a th:href="@{'/product-update/'+${product.getId()}}">
                                 <i class="material-icons">edit</i></a>
                             <a th:href="@{'/delete/' +${product.getId()}}">
                                 <i class="material-icons">delete</i></a>
@@ -38,8 +38,18 @@
                             <label class="col-sm-2 col-form-label">Price</label>
                             <div class="col-sm-7">
                                 <div class="form-group">
-                                    <input class="form-control" name="price" id="price" type="text"
-                                           placeholder="Price" th:value="${product.getPrice()}" required="true"
+                                    <input class="form-control" name="priceIn" id="priceIn" type="text"
+                                           placeholder="Price" th:value="${product.getPriceIn()}" required="true"
+                                           aria-required="true" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Price</label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="priceIn" id="priceOut" type="text"
+                                           placeholder="Price" th:value="${product.getPriceOut()}" required="true"
                                            aria-required="true" readonly/>
                                 </div>
                             </div>
@@ -52,6 +62,13 @@
                                               placeholder="Product details..." th:text="${product.getDetails()}"
                                               aria-required="true" th:rows="5" readonly></textarea>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Image</label>
+                            <div class="col-sm-7">
+                                <img th:src="${product.getImagePath()}"
+                                     alt="" width="100px" height="100px">
                             </div>
                         </div>
                     </div>
