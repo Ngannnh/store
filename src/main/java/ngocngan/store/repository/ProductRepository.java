@@ -11,8 +11,9 @@ import java.util.Optional;
  * @project sweet
  */
 
-public interface ProductRepository extends JpaRepository<Product,Integer> {
+public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Override List<Product> findAll();
     @Override Optional<Product> findById(Integer id);
     @Override void delete(Product product);
+    Product findByUuid(String uuid);
 }

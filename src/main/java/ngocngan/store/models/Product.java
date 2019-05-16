@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "product")
 public class Product {
     @Id @GeneratedValue @Column(name = "id") private Integer id;
+    private String uuid;
     private String name;
     private float priceIn;
     private float priceOut;
@@ -19,12 +20,21 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, float priceIn, float priceOut, String details, String imagePath) {
+    public Product(String uuid, String name, float priceIn, float priceOut, String details, String imagePath) {
+        this.uuid = uuid;
         this.name = name;
         this.priceIn = priceIn;
         this.priceOut = priceOut;
         this.details = details;
         this.imagePath = imagePath;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {

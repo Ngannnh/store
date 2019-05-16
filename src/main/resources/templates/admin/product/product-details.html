@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="fragments/layout" lang="en">
+      layout:decorate="admin/fragments/layout" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Details of product</title>
@@ -16,8 +16,8 @@
                 <input type="hidden" name="_token" value="ueLNYcgVay9rj3UwsHFnnw0yK5T01sHpKEjnk3Qu">
                 <div class="card ">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title">Details</h4>
-                        <p class="card-category">Product information</p>
+                        <h4 class="card-title">PRODUCT</h4>
+                        <p class="card-category">Product details information</p>
                     </div>
                     <div class="card-body ">
                         <div class="row">
@@ -29,9 +29,9 @@
                                            aria-required="true" readonly/>
                                 </div>
                             </div>
-                            <a th:href="@{'/product-update/'+${product.getId()}}">
+                            <a th:href="@{'/admin/product-update/'+${product.getUuid()}}">
                                 <i class="material-icons">edit</i></a>
-                            <a th:href="@{'/delete/' +${product.getId()}}">
+                            <a th:href="@{'/admin/delete/' +${product.getUuid()}}">
                                 <i class="material-icons">delete</i></a>
                         </div>
                         <div class="row">
