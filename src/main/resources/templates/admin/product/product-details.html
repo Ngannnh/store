@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="admin/fragments/layout" lang="en">
+      layout:decorate="~{admin/fragments/layout}" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Details of product</title>
@@ -11,7 +11,7 @@
 <div layout:fragment="content">
     <div class="row">
         <div class="col-md-12">
-            <form action="/save" method="post"
+            <form action="/product/save" method="post"
                   autocomplete="off" class="form-horizontal">
                 <input type="hidden" name="_token" value="ueLNYcgVay9rj3UwsHFnnw0yK5T01sHpKEjnk3Qu">
                 <div class="card ">
@@ -21,6 +21,14 @@
                     </div>
                     <div class="card-body ">
                         <div class="row">
+                            <div class="col-12 text-right">
+                                <a class="btn btn-sm btn-primary"
+                                   th:href="@{'/admin/product-update/'+${product.getUuid()}}"> Update</a>
+                                <a class="btn btn-sm btn-primary"
+                                   th:href="@{'/admin/product-delete/' +${product.getUuid()}}"> Remove</a>
+                            </div>
+                        </div>
+                        <div class="row">
                             <label class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-7">
                                 <div class="form-group">
@@ -29,10 +37,6 @@
                                            aria-required="true" readonly/>
                                 </div>
                             </div>
-                            <a th:href="@{'/admin/product-update/'+${product.getUuid()}}">
-                                <i class="material-icons">edit</i></a>
-                            <a th:href="@{'/admin/delete/' +${product.getUuid()}}">
-                                <i class="material-icons">delete</i></a>
                         </div>
                         <div class="row">
                             <label class="col-sm-2 col-form-label">Price</label>

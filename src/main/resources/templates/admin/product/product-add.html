@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="admin/fragments/layout" lang="en">
+      layout:decorate="~{admin/fragments/layout}" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Add new product</title>
@@ -11,7 +11,7 @@
 <div layout:fragment="content">
     <div class="row">
         <div class="col-md-12">
-            <form action="/save" method="post"
+            <form action="/product/save" method="post"
                   autocomplete="off" class="form-horizontal">
                 <input type="hidden" name="uuid">
                 <input type="hidden" name="_token" value="ueLNYcgVay9rj3UwsHFnnw0yK5T01sHpKEjnk3Qu">
@@ -22,29 +22,34 @@
                     </div>
                     <div class="card-body ">
                         <div class="row">
-                            <label class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-12 text-right">
+                                <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Name <b style="color: red">*</b></label>
                             <div class="col-sm-7">
                                 <div class="form-group">
                                     <input class="form-control" name="name" id="name" type="text"
-                                           placeholder="Name" required="true" aria-required="true"/>
+                                           placeholder="Name" required aria-required="true"/>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-sm-2 col-form-label">Price In</label>
+                            <label class="col-sm-2 col-form-label">Price In <b style="color: red">*</b></label>
                             <div class="col-sm-7">
                                 <div class="form-group">
                                     <input class="form-control" name="priceIn" id="priceIn" type="number"
-                                           placeholder="Price In" required="true" aria-required="true"/>
+                                           placeholder="Price In" required aria-required="true"/>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-sm-2 col-form-label">Price Out</label>
+                            <label class="col-sm-2 col-form-label">Price Out <b style="color: red">*</b></label>
                             <div class="col-sm-7">
                                 <div class="form-group">
                                     <input class="form-control" name="priceOut" id="priceOut" type="number"
-                                           placeholder="Price Out" required="true" aria-required="true"/>
+                                           placeholder="Price Out"  aria-required="true" required/>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +58,7 @@
                             <div class="col-sm-7">
                                 <div class="form-group">
                                     <textarea class="form-control" name="details" id="details"
-                                              placeholder="Product details..."
+                                              placeholder="Product details..." required
                                               aria-required="true" th:rows="5"></textarea>
                                 </div>
                             </div>
@@ -63,13 +68,10 @@
                             <div class="col-sm-7">
                                 <div class="form-group">
                                     <input class="form-control" name="imagePath" id="imagePath" type="text"
-                                           placeholder="Image Path" required="true" aria-required="true"/>
+                                           placeholder="Image Path" aria-required="true"/>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer ml-auto mr-auto">
-                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </form>

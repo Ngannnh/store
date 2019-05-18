@@ -5,7 +5,7 @@
       layout:decorate="~{admin/fragments/layout}" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Products list</title>
+    <title>Roles list</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -13,32 +13,31 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header card-header-primary">
-                    <h4 class="card-title ">PRODUCT</h4>
-                    <p class="card-category">List of products</p>
+                    <h4 class="card-title ">ROLE</h4>
+                    <p class="card-category">List of roles</p>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 text-right">
-                            <a th:href="@{/admin/product-add}" class="btn btn-sm btn-primary">Add</a>
+                            <a th:href="@{/admin/role-add}" class="btn btn-sm btn-primary">Add</a>
                         </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">
                             <th> ID</th>
-                            <th> Name</th>
-                            <th> Image</th>
+                            <th> Role</th>
                             <th class="text-right"> Actions</th>
                             </thead>
                             <tbody>
-                            <tr th:each="product:${products}">
-                                <td th:text="${product.getUuid()}"></td>
-                                <td th:text="${product.getName()}"></td>
-                                <td><img th:src="${product.getImagePath()}" alt="" width="30px" height="30px">
-                                </td>
+                            <tr th:each="role:${roles}">
+                                <td th:text="${role.getUuid()}"></td>
+                                <td th:text="${role.getRole()}"></td>
                                 <td class="td-actions text-right">
-                                    <a th:href="@{'/admin/product-details/'+${product.getUuid()}}"
-                                       class="btn btn-sm btn-primary">details</a>
+                                    <a th:href="@{'/admin/role-update/'+${role.getUuid()}}"
+                                       class="btn btn-sm btn-primary">update</a>
+                                    <a th:href="@{'/admin/role-delete/'+${role.getUuid()}}"
+                                       class="btn btn-sm btn-primary">delete</a>
                                 </td>
                             </tr>
                             </tbody>

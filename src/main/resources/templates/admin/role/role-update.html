@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Update role</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/role/save" method="post"
+                  autocomplete="off" class="form-horizontal">
+                <input type="hidden" name="uuid" th:value="${role.getUuid()}">
+                <input type="hidden" name="_token" value="ueLNYcgVay9rj3UwsHFnnw0yK5T01sHpKEjnk3Qu">
+                <div class="card ">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">ROLE</h4>
+                        <p class="card-category">Update role information</p>
+                    </div>
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-12 text-right">
+                                <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="role">Role <b style="color: red">*</b></label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="role" id="role" type="text"
+                                           placeholder="Role" th:value="${role.getRole()}" required
+                                           aria-required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

@@ -55,7 +55,7 @@
                 <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#user" aria-expanded="true">
                         <i class="fas fa-users"></i>
-                        <p>Users
+                        <p>User
                             <b class="caret"></b>
                         </p>
                     </a>
@@ -69,6 +69,30 @@
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link" th:href="@{/admin/product-add}">
+                                    <i class="fas fa-plus"></i>
+                                    <span class="sidebar-normal"><b>Add</b></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" data-toggle="collapse" href="#role" aria-expanded="true">
+                        <i class="fas fa-user-secret"></i>
+                        <p>Role
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="role">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/admin/roles}">
+                                    <i class="fas fa-list"></i>
+                                    <span class="sidebar-normal"><b>List</b></span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" th:href="@{/admin/role-add}">
                                     <i class="fas fa-plus"></i>
                                     <span class="sidebar-normal"><b>Add</b></span>
                                 </a>

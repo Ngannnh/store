@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * @author ngan nnh on 5/13/2019
+ * @author ngan nnh on 5/16/2019
  * @project sweet
  */
 @Controller
@@ -29,29 +26,18 @@ public class ProductController {
         ProductController.productRepository = productRepository;
     }
 
-    private List<Product> getAllProduct() {
-        try {
-            List<Product> products = productRepository.findAll();
-            LOGGER.info(Constant.LOGGER_INFO_LIST_SIZE(products.size()));
-            return products;
-        } catch (Exception e) {
-            LOGGER.warn(Constant.LOGGER_WARN(e));
-            return new ArrayList<>();
-        }
-    }
-
     private Product getProductByUUID(String uuid) {
         try {
             Product product = new Product();
             if (productRepository.findByUuid(uuid) != null) {
                 product = productRepository.findByUuid(uuid);
-                LOGGER.info("THE PRODUCT " + product.getUuid() + " BE FOUND");
+                LOGGER.info(Constant.LOGGER_PRODUCT_FOUND(product.getUuid()));
             } else {
-                LOGGER.warn("THE PRODUCT " + uuid + " CAN'T BE FOUND");
+                LOGGER.warn(Constant.LOGGER_PRODUCT_NOT_FOUND(uuid));
             }
             return product;
         } catch (Exception e) {
-            LOGGER.warn(Constant.LOGGER_WARN(e));
+            LOGGER.warn(Constant.LOGGER_EXCEPTION(e));
             return new Product();
         }
     }
@@ -67,10 +53,10 @@ public class ProductController {
             product.setDetails(details);
             product.setImagePath(imagePath);
             productRepository.save(product);
-            LOGGER.info(Constant.LOGGER_INFO_SAVE_SUCCESS(name));
+            LOGGER.info(Constant.LOGGER_SAVE_PRODUCT_SUCCESS(name));
             return product;
         } catch (Exception e) {
-            LOGGER.warn(Constant.LOGGER_WARN(e));
+            LOGGER.warn(Constant.LOGGER_EXCEPTION(e));
             return new Product();
         }
     }
@@ -78,9 +64,9 @@ public class ProductController {
     private void deleteProduct(String uuid){
         try{
             productRepository.delete(getProductByUUID(uuid));
-            LOGGER.info(Constant.LOGGER_INFO_DELETE_SUCCESS(uuid));
+            LOGGER.info(Constant.LOGGER_DELETE_PRODUCT_SUCCESS(uuid));
         }catch (Exception e){
-            LOGGER.warn(Constant.LOGGER_WARN(e));
+            LOGGER.warn(Constant.LOGGER_EXCEPTION(e));
         }
     }
 
@@ -95,40 +81,40 @@ public class ProductController {
     }
 
     @RequestMapping(value = { "/admin/products" }, method = RequestMethod.GET) public ModelAndView products() {
-        ModelAndView modelAndView = MainController.setViewName("admin/product/products");
-        modelAndView.addObject("products", getAllProduct());
+        ModelAndView modelAndView = BaseController.setViewName("admin/product/products");
+        modelAndView.addObject("products", BaseController.getList(productRepository.findAll()));
         return modelAndView;
     }
 
     @RequestMapping(value = { "/admin/product-add" }, method = RequestMethod.GET) public ModelAndView addProduct() {
-        return MainController.setViewName("admin/product/product-add");
+        return BaseController.setViewName("admin/product/product-add");
     }
 
     @RequestMapping(value = { "/admin/product-details/{uuid}" }, method = RequestMethod.GET)
     public ModelAndView productDetails(@PathVariable String uuid) {
-        ModelAndView modelAndView = MainController.setViewName("admin/product/product-details");
+        ModelAndView modelAndView = BaseController.setViewName("admin/product/product-details");
         return getModelAndView(modelAndView,uuid);
     }
 
     @RequestMapping(value = { "/admin/product-update/{uuid}" }, method = RequestMethod.GET)
     public ModelAndView productUpdate(@PathVariable String uuid) {
-        ModelAndView modelAndView = MainController.setViewName("admin/product/product-update");
+        ModelAndView modelAndView = BaseController.setViewName("admin/product/product-update");
         return getModelAndView(modelAndView,uuid);
     }
 
-    @RequestMapping(value = { "/admin/delete/{uuid}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/admin/product-delete/{uuid}" }, method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable String uuid) {
         deleteProduct(uuid);
-        return MainController.setViewName("redirect:/admin/products/");
+        return BaseController.setViewName("redirect:/admin/products");
     }
 
-    @RequestMapping(value = { "/save" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/product/save" }, method = RequestMethod.POST)
     public ModelAndView save(@RequestParam String uuid, @RequestParam String name, @RequestParam Float priceIn,
             @RequestParam Float priceOut, @RequestParam String details, @RequestParam String imagePath) {
         if (uuid.isEmpty()) {
-            uuid = MainController.getUUID();
+            uuid = BaseController.getUUID();
         }
-        return MainController.setViewName(
+        return BaseController.setViewName(
                 "redirect:/admin/product-details/" + saveProduct(uuid, name, priceIn, priceOut, details, imagePath)
                         .getUuid());
     }
