@@ -11,73 +11,69 @@
 <div layout:fragment="content">
     <div class="row">
         <div class="col-md-12">
-            <form action="/product/save" method="post"
-                  autocomplete="off" class="form-horizontal">
-                <input type="hidden" name="_token" value="ueLNYcgVay9rj3UwsHFnnw0yK5T01sHpKEjnk3Qu">
-                <div class="card ">
-                    <div class="card-header card-header-primary">
-                        <h4 class="card-title">PRODUCT</h4>
-                        <p class="card-category">Product details information</p>
+            <div class="card ">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title">PRODUCT</h4>
+                    <p class="card-category">Product details information</p>
+                </div>
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <a class="btn btn-sm btn-primary"
+                               th:href="@{'/admin/product-update/'+${product.getUuid()}}"> Update</a>
+                            <a class="btn btn-sm btn-primary"
+                               th:href="@{'/admin/product-delete/' +${product.getUuid()}}"> Remove</a>
+                        </div>
                     </div>
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-12 text-right">
-                                <a class="btn btn-sm btn-primary"
-                                   th:href="@{'/admin/product-update/'+${product.getUuid()}}"> Update</a>
-                                <a class="btn btn-sm btn-primary"
-                                   th:href="@{'/admin/product-delete/' +${product.getUuid()}}"> Remove</a>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input class="form-control" name="name" id="name" type="text"
+                                       placeholder="Name" th:value="${product.getName()}" required="true"
+                                       aria-required="true" readonly/>
                             </div>
                         </div>
-                        <div class="row">
-                            <label class="col-sm-2 col-form-label">Name</label>
-                            <div class="col-sm-7">
-                                <div class="form-group">
-                                    <input class="form-control" name="name" id="name" type="text"
-                                           placeholder="Name" th:value="${product.getName()}" required="true"
-                                           aria-required="true" readonly/>
-                                </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Price</label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input class="form-control" name="priceIn" id="priceIn" type="text"
+                                       placeholder="Price" th:value="${product.getPriceIn()}" required="true"
+                                       aria-required="true" readonly/>
                             </div>
                         </div>
-                        <div class="row">
-                            <label class="col-sm-2 col-form-label">Price</label>
-                            <div class="col-sm-7">
-                                <div class="form-group">
-                                    <input class="form-control" name="priceIn" id="priceIn" type="text"
-                                           placeholder="Price" th:value="${product.getPriceIn()}" required="true"
-                                           aria-required="true" readonly/>
-                                </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Price</label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input class="form-control" name="priceIn" id="priceOut" type="text"
+                                       placeholder="Price" th:value="${product.getPriceOut()}" required="true"
+                                       aria-required="true" readonly/>
                             </div>
                         </div>
-                        <div class="row">
-                            <label class="col-sm-2 col-form-label">Price</label>
-                            <div class="col-sm-7">
-                                <div class="form-group">
-                                    <input class="form-control" name="priceIn" id="priceOut" type="text"
-                                           placeholder="Price" th:value="${product.getPriceOut()}" required="true"
-                                           aria-required="true" readonly/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-sm-2 col-form-label">Details</label>
-                            <div class="col-sm-7">
-                                <div class="form-group">
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Details</label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
                                     <textarea class="form-control" name="details" id="details" required="true"
                                               placeholder="Product details..." th:text="${product.getDetails()}"
                                               aria-required="true" th:rows="5" readonly></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-sm-2 col-form-label">Image</label>
-                            <div class="col-sm-7">
-                                <img th:src="${product.getImagePath()}"
-                                     alt="" width="100px" height="100px">
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Image</label>
+                        <div class="col-sm-7">
+                            <img th:src="${product.getImagePath()}"
+                                 alt="" width="100px" height="100px">
+                        </div>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

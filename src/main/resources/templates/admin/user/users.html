@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/fragments/layout}" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Users list</title>
 </head>
 <body>
-
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">USER</h4>
+                    <p class="card-category">List of users</p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <a th:href="@{/admin/user-add}" class="btn btn-sm btn-primary">Add</a>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                            <th> Email</th>
+                            <th> Phone</th>
+                            <th> Image</th>
+                            <th> ID</th>
+                            <th class="text-right"> Actions</th>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user:${users}">
+                                <td th:text="${user.getEmail()}"></td>
+                                <td th:text="${user.getPhone()}"></td>
+                                <td><img th:src="${user.getImage()}" alt="" width="30px" height="30px">
+                                </td>
+                                <td th:text="${user.getUuid()}"></td>
+                                <td class="td-actions text-right">
+                                    <a th:href="@{'/admin/user-details/'+${user.getUuid()}}"
+                                       class="btn btn-sm btn-primary">details</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

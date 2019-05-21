@@ -1,10 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/fragments/layout}" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add new user</title>
 </head>
 <body>
-
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/admin/user-save" method="post"
+                  autocomplete="off" class="form-horizontal">
+                <input type="hidden" name="uuid">
+                <input type="hidden" name="_token" value="ueLNYcgVay9rj3UwsHFnnw0yK5T01sHpKEjnk3Qu">
+                <div class="card ">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">USER</h4>
+                        <p class="card-category">Add new user</p>
+                    </div>
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-12 text-right">
+                                <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="email">Email <b style="color: red">*</b></label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="email" id="email" type="email"
+                                           placeholder="Email" required aria-required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="password">Password <b style="color: red">*</b></label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="password" id="password" type="password"
+                                           placeholder="Password" required aria-required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="phone">Phone <b style="color: red">*</b></label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="phone" id="phone" type="text"
+                                           placeholder="Phone" required aria-required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="firstName">First name <b style="color: red">*</b></label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="firstName" id="firstName" type="text"
+                                           placeholder="First name" required aria-required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="lastName">Last name </label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="lastName" id="lastName" type="text"
+                                           placeholder="Last name"  aria-required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="city">City </label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="city" id="city" type="text"
+                                           placeholder="City"  aria-required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="address">Address </label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="address" id="address" type="text"
+                                           placeholder="Address"  aria-required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="image">Image </label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input class="form-control" name="image" id="image" type="text"
+                                           placeholder="Image"  aria-required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

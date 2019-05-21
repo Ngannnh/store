@@ -13,17 +13,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 /**
  * @author ngan nnh on 5/16/2019
  * @project sweet
  */
 @Controller
+@RequestMapping(value = "/admin")
 public class ProductController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
     private static ProductRepository productRepository;
 
     @Autowired public ProductController(ProductRepository productRepository) {
         ProductController.productRepository = productRepository;
+    }
+
+    private List<Product> getProducts(){
+        try {
+            List<Product> products = productRepository.findAll();
+            LOGGER.info(Constant.LOGGER_INFO_PRODUCTS_SIZE(products.size()));
+            return products;
+        } catch (Exception e) {
+            LOGGER.warn(Constant.LOGGER_EXCEPTION(e));
+            return null;
+        }
     }
 
     private Product getProductByUUID(String uuid) {
@@ -80,35 +94,35 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = { "/admin/products" }, method = RequestMethod.GET) public ModelAndView products() {
+    @RequestMapping(value = { "/products" }, method = RequestMethod.GET) public ModelAndView products() {
         ModelAndView modelAndView = BaseController.setViewName("admin/product/products");
-        modelAndView.addObject("products", BaseController.getList(productRepository.findAll()));
+        modelAndView.addObject("products", getProducts());
         return modelAndView;
     }
 
-    @RequestMapping(value = { "/admin/product-add" }, method = RequestMethod.GET) public ModelAndView addProduct() {
+    @RequestMapping(value = { "/product-add" }, method = RequestMethod.GET) public ModelAndView addProduct() {
         return BaseController.setViewName("admin/product/product-add");
     }
 
-    @RequestMapping(value = { "/admin/product-details/{uuid}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/product-details/{uuid}" }, method = RequestMethod.GET)
     public ModelAndView productDetails(@PathVariable String uuid) {
         ModelAndView modelAndView = BaseController.setViewName("admin/product/product-details");
         return getModelAndView(modelAndView,uuid);
     }
 
-    @RequestMapping(value = { "/admin/product-update/{uuid}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/product-update/{uuid}" }, method = RequestMethod.GET)
     public ModelAndView productUpdate(@PathVariable String uuid) {
         ModelAndView modelAndView = BaseController.setViewName("admin/product/product-update");
         return getModelAndView(modelAndView,uuid);
     }
 
-    @RequestMapping(value = { "/admin/product-delete/{uuid}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/product-delete/{uuid}" }, method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable String uuid) {
         deleteProduct(uuid);
         return BaseController.setViewName("redirect:/admin/products");
     }
 
-    @RequestMapping(value = { "/product/save" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/product-save" }, method = RequestMethod.POST)
     public ModelAndView save(@RequestParam String uuid, @RequestParam String name, @RequestParam Float priceIn,
             @RequestParam Float priceOut, @RequestParam String details, @RequestParam String imagePath) {
         if (uuid.isEmpty()) {

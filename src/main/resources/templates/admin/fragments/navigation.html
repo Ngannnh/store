@@ -16,14 +16,14 @@
             Tip 2: you can also add an image using data-image tag
         -->
         <div class="logo">
-            <a th:href="@{/}" class="simple-text logo-normal">
+            <a th:href="@{/admin}" class="simple-text logo-normal">
                 SNACKS STORE
             </a>
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">
+                    <a class="nav-link" th:href="@{/admin}">
                         <i class="fas fa-home"></i>
                         <p>Home</p>
                     </a>
@@ -62,13 +62,13 @@
                     <div class="collapse" id="user">
                         <ul class="nav">
                             <li class="nav-item">
-                                <a class="nav-link" th:href="@{/admin/products}">
+                                <a class="nav-link" th:href="@{/admin/users}">
                                     <i class="fas fa-list"></i>
                                     <span class="sidebar-normal"><b>List</b></span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" th:href="@{/admin/product-add}">
+                                <a class="nav-link" th:href="@{/admin/user-add}">
                                     <i class="fas fa-plus"></i>
                                     <span class="sidebar-normal"><b>Add</b></span>
                                 </a>

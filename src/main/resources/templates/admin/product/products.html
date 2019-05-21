@@ -25,17 +25,17 @@
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">
-                            <th> ID</th>
                             <th> Name</th>
                             <th> Image</th>
+                            <th> ID</th>
                             <th class="text-right"> Actions</th>
                             </thead>
                             <tbody>
                             <tr th:each="product:${products}">
-                                <td th:text="${product.getUuid()}"></td>
                                 <td th:text="${product.getName()}"></td>
                                 <td><img th:src="${product.getImagePath()}" alt="" width="30px" height="30px">
                                 </td>
+                                <td th:text="${product.getUuid()}"></td>
                                 <td class="td-actions text-right">
                                     <a th:href="@{'/admin/product-details/'+${product.getUuid()}}"
                                        class="btn btn-sm btn-primary">details</a>

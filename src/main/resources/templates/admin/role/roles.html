@@ -25,14 +25,14 @@
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">
-                            <th> ID</th>
                             <th> Role</th>
+                            <th> ID</th>
                             <th class="text-right"> Actions</th>
                             </thead>
                             <tbody>
                             <tr th:each="role:${roles}">
-                                <td th:text="${role.getUuid()}"></td>
                                 <td th:text="${role.getRole()}"></td>
+                                <td th:text="${role.getUuid()}"></td>
                                 <td class="td-actions text-right">
                                     <a th:href="@{'/admin/role-update/'+${role.getUuid()}}"
                                        class="btn btn-sm btn-primary">update</a>

@@ -1,10 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/fragments/layout}" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Details of user</title>
 </head>
 <body>
-
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title">USER</h4>
+                    <p class="card-category">User details information</p>
+                </div>
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <a class="btn btn-sm btn-primary"
+                               th:href="@{'/admin/user-update/'+${user.getUuid()}}"> Update</a>
+                            <a class="btn btn-sm btn-primary"
+                               th:href="@{'/admin/user-delete/' +${user.getUuid()}}"> Remove</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="email">Email </label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input class="form-control" name="email" id="email" type="email"
+                                       placeholder="Email" aria-required="true" readonly
+                                       th:value="${user.getEmail()}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="phone">Phone </label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input class="form-control" name="phone" id="phone" type="text"
+                                       placeholder="Phone" aria-required="true" readonly
+                                       th:value="${user.getPhone()}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="firstName">First name <b
+                                style="color: red">*</b></label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input class="form-control" name="firstName" id="firstName" type="text"
+                                       placeholder="First name" aria-required="true" readonly
+                                       th:value="${user.getFirstName()}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="lastName">Last name </label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input class="form-control" name="lastName" id="lastName" type="text"
+                                       placeholder="Last name" aria-required="true" readonly
+                                       th:value="${user.getLastName()}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="city">City </label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input class="form-control" name="city" id="city" type="text"
+                                       placeholder="City" aria-required="true" readonly
+                                       th:value="${user.getCity()}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="address">Address </label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input class="form-control" name="address" id="address" type="text"
+                                       placeholder="Address" aria-required="true" readonly
+                                       th:value="${user.getAddress()}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="image">Image </label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input class="form-control" name="image" id="image" type="text"
+                                       placeholder="Image" aria-required="true" readonly
+                                       th:value="${user.getImage()}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

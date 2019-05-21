@@ -1,8 +1,11 @@
 package ngocngan.store.controller;
 
 import ngocngan.store.constant.Constant;
+import ngocngan.store.repository.ProductRepository;
+import ngocngan.store.repository.RoleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +22,13 @@ import java.util.UUID;
 @Controller
 public class BaseController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
+    private static ProductRepository productRepository;
+    private static RoleRepository roleRepository;
+
+    @Autowired public BaseController(ProductRepository productRepository, RoleRepository roleRepository) {
+        BaseController.productRepository = productRepository;
+        BaseController.roleRepository = roleRepository;
+    }
 
     @RequestMapping(value = { "admin" }, method = RequestMethod.GET) public ModelAndView index() {
         return setViewName("admin/index");
@@ -30,10 +40,6 @@ public class BaseController {
 
     static ModelAndView getModelAndView() {
         return new ModelAndView();
-    }
-
-    public static String getMethodName() {
-        return new Throwable().getStackTrace()[2].getMethodName();
     }
 
     static String getUUID() {
@@ -50,16 +56,6 @@ public class BaseController {
             modelAndView.setViewName("redirect:/404");
             LOGGER.warn(Constant.LOGGER_EXCEPTION(e));
             return modelAndView;
-        }
-    }
-
-    static List<?> getList(List<?> list) {
-        try {
-            LOGGER.info(Constant.LOGGER_INFO_LIST_SIZE(list.size()));
-            return list;
-        } catch (Exception e) {
-            LOGGER.warn(Constant.LOGGER_EXCEPTION(e));
-            return new ArrayList<>();
         }
     }
 }
