@@ -136,5 +136,4 @@ public class UserController {
                 "redirect:/admin/user-details/" + saveUser(uuid, email, password, firstName, lastName, phone, city,
                         address,image).getUuid());
     }
-
 }

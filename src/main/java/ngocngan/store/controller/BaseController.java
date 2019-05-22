@@ -38,6 +38,14 @@ public class BaseController {
         return setViewName("404");
     }
 
+    @RequestMapping(value = { "/login" }, method = RequestMethod.GET) public ModelAndView login() {
+        return setViewName("admin/login");
+    }
+
+    @RequestMapping(value = { "/register" }, method = RequestMethod.GET) public ModelAndView register() {
+        return setViewName("admin/register");
+    }
+
     static ModelAndView getModelAndView() {
         return new ModelAndView();
     }
