@@ -3,6 +3,8 @@ package ngocngan.store.controller;
 import ngocngan.store.constant.Constant;
 import ngocngan.store.models.Product;
 import ngocngan.store.repository.ProductRepository;
+import ngocngan.store.service.BaseService;
+import ngocngan.store.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,69 +25,16 @@ import java.util.List;
 @RequestMapping(value = "/admin")
 public class ProductController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
-    private static ProductRepository productRepository;
+    private static BaseService baseService;
+    private static ProductService productService;
 
-    @Autowired public ProductController(ProductRepository productRepository) {
-        ProductController.productRepository = productRepository;
+    @Autowired public ProductController(ProductService productService, BaseService baseService) {
+        ProductController.baseService = baseService;
+        ProductController.productService = productService;
     }
 
-    private List<Product> getProducts(){
-        try {
-            List<Product> products = productRepository.findAll();
-            LOGGER.info(Constant.LOGGER_INFO_PRODUCTS_SIZE(products.size()));
-            return products;
-        } catch (Exception e) {
-            LOGGER.warn(Constant.LOGGER_EXCEPTION(e));
-            return null;
-        }
-    }
-
-    private Product getProductByUUID(String uuid) {
-        try {
-            Product product = new Product();
-            if (productRepository.findByUuid(uuid) != null) {
-                product = productRepository.findByUuid(uuid);
-                LOGGER.info(Constant.LOGGER_PRODUCT_FOUND(product.getUuid()));
-            } else {
-                LOGGER.warn(Constant.LOGGER_PRODUCT_NOT_FOUND(uuid));
-            }
-            return product;
-        } catch (Exception e) {
-            LOGGER.warn(Constant.LOGGER_EXCEPTION(e));
-            return new Product();
-        }
-    }
-
-    private Product saveProduct(String uuid, String name, float priceIn, float priceOut, String details,
-            String imagePath) {
-        try {
-            Product product = getProductByUUID(uuid);
-            product.setUuid(uuid);
-            product.setName(name);
-            product.setPriceIn(priceIn);
-            product.setPriceOut(priceOut);
-            product.setDetails(details);
-            product.setImagePath(imagePath);
-            productRepository.save(product);
-            LOGGER.info(Constant.LOGGER_SAVE_PRODUCT_SUCCESS(name));
-            return product;
-        } catch (Exception e) {
-            LOGGER.warn(Constant.LOGGER_EXCEPTION(e));
-            return new Product();
-        }
-    }
-
-    private void deleteProduct(String uuid){
-        try{
-            productRepository.delete(getProductByUUID(uuid));
-            LOGGER.info(Constant.LOGGER_DELETE_PRODUCT_SUCCESS(uuid));
-        }catch (Exception e){
-            LOGGER.warn(Constant.LOGGER_EXCEPTION(e));
-        }
-    }
-
-    private ModelAndView getModelAndView(ModelAndView modelAndView,String uuid){
-        Product product = getProductByUUID(uuid);
+    private ModelAndView getModelAndView(ModelAndView modelAndView, String uuid) {
+        Product product = productService.getProductByUUID(uuid);
         if (product.getUuid() != null) {
             modelAndView.addObject("product", product);
         } else {
@@ -95,41 +44,41 @@ public class ProductController {
     }
 
     @RequestMapping(value = { "/products" }, method = RequestMethod.GET) public ModelAndView products() {
-        ModelAndView modelAndView = BaseController.setViewName("admin/product/products");
-        modelAndView.addObject("products", getProducts());
+        ModelAndView modelAndView = baseService.setViewName("admin/product/products");
+        modelAndView.addObject("products", productService.getProducts());
         return modelAndView;
     }
 
     @RequestMapping(value = { "/product-add" }, method = RequestMethod.GET) public ModelAndView addProduct() {
-        return BaseController.setViewName("admin/product/product-add");
+        return baseService.setViewName("admin/product/product-add");
     }
 
     @RequestMapping(value = { "/product-details/{uuid}" }, method = RequestMethod.GET)
     public ModelAndView productDetails(@PathVariable String uuid) {
-        ModelAndView modelAndView = BaseController.setViewName("admin/product/product-details");
-        return getModelAndView(modelAndView,uuid);
+        ModelAndView modelAndView = baseService.setViewName("admin/product/product-details");
+        return getModelAndView(modelAndView, uuid);
     }
 
     @RequestMapping(value = { "/product-update/{uuid}" }, method = RequestMethod.GET)
     public ModelAndView productUpdate(@PathVariable String uuid) {
-        ModelAndView modelAndView = BaseController.setViewName("admin/product/product-update");
-        return getModelAndView(modelAndView,uuid);
+        ModelAndView modelAndView = baseService.setViewName("admin/product/product-update");
+        return getModelAndView(modelAndView, uuid);
     }
 
     @RequestMapping(value = { "/product-delete/{uuid}" }, method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable String uuid) {
-        deleteProduct(uuid);
-        return BaseController.setViewName("redirect:/admin/products");
+        productService.deleteProduct(uuid);
+        return baseService.setViewName("redirect:/admin/products");
     }
 
     @RequestMapping(value = { "/product-save" }, method = RequestMethod.POST)
     public ModelAndView save(@RequestParam String uuid, @RequestParam String name, @RequestParam Float priceIn,
             @RequestParam Float priceOut, @RequestParam String details, @RequestParam String imagePath) {
         if (uuid.isEmpty()) {
-            uuid = BaseController.getUUID();
+            uuid = baseService.getRandomUUID();
         }
-        return BaseController.setViewName(
-                "redirect:/admin/product-details/" + saveProduct(uuid, name, priceIn, priceOut, details, imagePath)
+        return baseService.setViewName(
+                "redirect:/admin/product-details/" + productService.saveProduct(uuid, name, priceIn, priceOut, details, imagePath)
                         .getUuid());
     }
 }

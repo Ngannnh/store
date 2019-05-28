@@ -16,4 +16,5 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
     @Override Optional<Role> findById(Integer id);
     @Override void delete(Role role);
     Role findByUuid(String uuid);
+    Role findByRole(String role);
 }

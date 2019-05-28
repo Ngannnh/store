@@ -96,6 +96,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="role">Role </label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input class="form-control" name="role" id="role" type="text"
+                                       placeholder="Role" aria-required="true" readonly
+                                       th:value="${user.getRole()}"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

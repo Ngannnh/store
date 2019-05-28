@@ -1,18 +1,20 @@
 package ngocngan.store.controller;
 
 import ngocngan.store.constant.Constant;
+import ngocngan.store.models.Users;
 import ngocngan.store.repository.ProductRepository;
 import ngocngan.store.repository.RoleRepository;
+import ngocngan.store.service.BaseService;
+import ngocngan.store.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -21,49 +23,41 @@ import java.util.UUID;
  */
 @Controller
 public class BaseController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
-    private static ProductRepository productRepository;
-    private static RoleRepository roleRepository;
 
-    @Autowired public BaseController(ProductRepository productRepository, RoleRepository roleRepository) {
-        BaseController.productRepository = productRepository;
-        BaseController.roleRepository = roleRepository;
+    private static BaseService baseService;
+    private static LoginService loginService;
+
+    @Autowired public BaseController(BaseService baseService, LoginService loginService) {
+        BaseController.baseService = baseService;
+        BaseController.loginService = loginService;
     }
 
     @RequestMapping(value = { "admin" }, method = RequestMethod.GET) public ModelAndView index() {
-        return setViewName("admin/index");
+        return baseService.setViewName("admin/index");
+    }
+
+    @RequestMapping(value = { "homepage" }, method = RequestMethod.GET) public ModelAndView homepage() {
+        return baseService.setViewName("customer/index");
     }
 
     @RequestMapping(value = { "/404" }, method = RequestMethod.GET) public ModelAndView _404() {
-        return setViewName("404");
+        return baseService.setViewName("404");
     }
+
+    @RequestMapping(value = { "/access-denied" }, method = RequestMethod.GET) public ModelAndView accessDenied() {
+        return baseService.setViewName("access-denied");
+    }
+
+//    @RequestMapping(value = { "/register" }, method = RequestMethod.GET) public ModelAndView register() {
+//        return baseService.setViewName("admin/register");
+//    }
 
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET) public ModelAndView login() {
-        return setViewName("admin/login");
+        return baseService.setViewName("admin/login");
     }
 
-    @RequestMapping(value = { "/register" }, method = RequestMethod.GET) public ModelAndView register() {
-        return setViewName("admin/register");
-    }
-
-    static ModelAndView getModelAndView() {
-        return new ModelAndView();
-    }
-
-    static String getUUID() {
-        return UUID.randomUUID().toString().toUpperCase();
-    }
-
-    static ModelAndView setViewName(String viewName) {
-        ModelAndView modelAndView = new ModelAndView();
-        try {
-            modelAndView.setViewName(viewName);
-            LOGGER.info("JUST ACCESS TO: " + viewName);
-            return modelAndView;
-        } catch (Exception e) {
-            modelAndView.setViewName("redirect:/404");
-            LOGGER.warn(Constant.LOGGER_EXCEPTION(e));
-            return modelAndView;
-        }
+    @RequestMapping(value = { "/login-form" }, method = RequestMethod.POST)
+    public ModelAndView login_form(@RequestParam String email, @RequestParam String password) {
+        return loginService.checkLogin(email,password);
     }
 }

@@ -19,12 +19,13 @@ public class Users {
     private String city;
     private String address;
     private String image;
+    private String role;
 
     public Users() {
     }
 
     public Users(String uuid, String email, String password, String firstName, String lastName, String phone,
-            String city, String address, String image) {
+            String city, String address, String image, String role) {
         this.uuid = uuid;
         this.email = email;
         this.password = password;
@@ -34,6 +35,15 @@ public class Users {
         this.city = city;
         this.address = address;
         this.image = image;
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Integer getId() {

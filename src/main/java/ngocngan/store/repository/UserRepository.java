@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<Users,Integer> {
     @Override Optional<Users> findById(Integer id);
     @Override void delete(Users users);
     Users findByUuid(String uuid);
+    Users findByEmail(String email);
+    Users findByPhone(String phone);
 }
