@@ -74,6 +74,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/customer/**","/admin/**");
+        web.ignoring().antMatchers("/customer/**","/admin/css/**","/admin/font/**","/admin/js/**");
     }
 }
