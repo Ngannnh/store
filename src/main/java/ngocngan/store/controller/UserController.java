@@ -30,9 +30,7 @@ public class UserController {
     private static BaseService baseService;
     private static UserService userService;
 
-    @Autowired
-    public UserController(RoleController roleController, BaseService baseService,
-            UserService userService) {
+    @Autowired public UserController(RoleController roleController, BaseService baseService, UserService userService) {
         UserController.roleController = roleController;
         UserController.baseService = baseService;
         UserController.userService = userService;
@@ -45,24 +43,18 @@ public class UserController {
     }
 
     @RequestMapping(value = { "/user-add" }, method = RequestMethod.GET) public ModelAndView addUser() {
-        ModelAndView modelAndView = baseService.setViewName("admin/user/user-add");
-        modelAndView.addObject("roles", userService.getRoles());
-        return modelAndView;
+        return baseService.setViewName("admin/user/user-add").addObject("roles", userService.getRoles());
     }
 
     @RequestMapping(value = { "/user-details/{uuid}" }, method = RequestMethod.GET)
     public ModelAndView userDetails(@PathVariable String uuid) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin/user/user-details");
-        return getModelAndView(modelAndView, uuid);
+        return getModelAndView(baseService.setViewName("admin/user/user-details"), uuid);
     }
 
     @RequestMapping(value = { "/user-update/{uuid}" }, method = RequestMethod.GET)
     public ModelAndView userUpdate(@PathVariable String uuid) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin/user/user-update");
-        modelAndView.addObject("roles", userService.getRoles());
-        return getModelAndView(modelAndView, uuid);
+        return getModelAndView(
+                baseService.setViewName("admin/user/user-update").addObject("roles", userService.getRoles()), uuid);
     }
 
     @RequestMapping(value = { "/user-delete/{uuid}" }, method = RequestMethod.GET)
@@ -79,9 +71,20 @@ public class UserController {
         if (uuid.isEmpty()) {
             uuid = baseService.getRandomUUID();
         }
-        return baseService.setViewName(
-                "redirect:/admin/user-details/" + userService.saveUser(uuid, email, password, firstName, lastName, phone, city,
-                        address, image, role).getUuid());
+        return baseService.setViewName("redirect:/admin/user-details/" + userService
+                .saveUser(uuid, email, password, firstName, lastName, phone, city, address, image, role).getUuid());
+    }
+
+    @RequestMapping(value = { "/register-save" }, method = RequestMethod.POST)
+    public ModelAndView register(@RequestParam String uuid, @RequestParam String email, @RequestParam String password,
+            @RequestParam String firstName, @RequestParam String lastName, @RequestParam String phone,
+            @RequestParam String city, @RequestParam String address, @RequestParam String image,
+            @RequestParam String role) {
+        if (uuid.isEmpty()) {
+            uuid = baseService.getRandomUUID();
+        }
+        userService.saveUser(uuid, email, password, firstName, lastName, phone, city, address, image, role);
+        return baseService.setViewName("/");
     }
 
     private ModelAndView getModelAndView(ModelAndView modelAndView, String uuid) {

@@ -8,6 +8,7 @@ import ngocngan.store.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,10 +23,14 @@ public class UserService {
 
     private static UserRepository userRepository;
     private static RoleRepository roleRepository;
+    private static BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired public UserService(UserRepository userRepository,RoleRepository roleRepository){
+    @Autowired
+    public UserService(UserRepository userRepository, RoleRepository roleRepository,
+            BCryptPasswordEncoder bCryptPasswordEncoder) {
         UserService.userRepository = userRepository;
         UserService.roleRepository = roleRepository;
+        UserService.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     // USER SERVICE ****************************************************************
@@ -63,7 +68,7 @@ public class UserService {
             Users user = getUserByUUID(uuid);
             user.setUuid(uuid);
             user.setEmail(email);
-            user.setPassword(password);
+            user.setPassword(bCryptPasswordEncoder.encode(password));
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setPhone(phone);
@@ -88,7 +93,6 @@ public class UserService {
             LOGGER.warn(Constant.LOGGER_EXCEPTION(e));
         }
     }
-
 
     // ROLE SERVICE ****************************************************************
 
