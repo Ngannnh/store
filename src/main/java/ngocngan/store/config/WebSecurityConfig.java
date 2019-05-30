@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         // The pages has'n to login
-        http.authorizeRequests().antMatchers("/**", "/login", "/logout", "/register", "/access-denied").permitAll();
+        http.authorizeRequests().antMatchers("/", "/login", "/logout", "/register", "/access-denied").permitAll();
 
         // Only ADMIN role
         http.authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest().hasRole("ADMIN");
