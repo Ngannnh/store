@@ -6,110 +6,98 @@
     <title>Header</title>
 </head>
 <body>
-<th:block th:fragment="header">
+<th:block th:fragment="header_index">
 
-    <!-- Sidebar -->
+    <!-- Home -->
 
-    <div class="sidebar">
+    <div class="home">
 
-        <!-- Info -->
-        <div class="info">
-            <div class="info_content d-flex flex-row align-items-center justify-content-start">
+        <!-- Home Slider -->
+        <div class="home_slider_container">
+            <div class="owl-carousel owl-theme home_slider">
 
-                <!-- Language -->
-                <div class="info_languages has_children">
-                    <div class="language_flag"><img src="customer/images/flag_1.svg"
-                                                    alt="https://www.flaticon.com/authors/freepik"></div>
-                    <div class="dropdown_text">english</div>
-                    <div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
-
-                    <!-- Language Dropdown Menu -->
-                    <ul>
-                        <li><a href="#">
-                            <div class="language_flag"><img src="customer/images/flag_2.svg"
-                                                            alt="https://www.flaticon.com/authors/freepik"></div>
-                            <div class="dropdown_text">french</div>
-                        </a></li>
-                        <li><a href="#">
-                            <div class="language_flag"><img src="customer/images/flag_3.svg"
-                                                            alt="https://www.flaticon.com/authors/freepik"></div>
-                            <div class="dropdown_text">japanese</div>
-                        </a></li>
-                        <li><a href="#">
-                            <div class="language_flag"><img src="customer/images/flag_4.svg"
-                                                            alt="https://www.flaticon.com/authors/freepik"></div>
-                            <div class="dropdown_text">russian</div>
-                        </a></li>
-                        <li><a href="#">
-                            <div class="language_flag"><img src="customer/images/flag_5.svg"
-                                                            alt="https://www.flaticon.com/authors/freepik"></div>
-                            <div class="dropdown_text">spanish</div>
-                        </a></li>
-                    </ul>
-
+                <!-- Slide -->
+                <div class="owl-item">
+                    <div class="background_image" style="background-image:url(customer/images/home_slider_1.jpg)"></div>
+                    <div class="home_content_container">
+                        <div class="home_content">
+                            <div class="home_discount d-flex flex-row align-items-end justify-content-start">
+                                <div class="home_discount_num">20</div>
+                                <div class="home_discount_text">Discount on the</div>
+                            </div>
+                            <div class="home_title">New Collection</div>
+                            <div class="button button_1 home_button trans_200"><a href="categories.html">Shop NOW!</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Currency -->
-                <div class="info_currencies has_children">
-                    <div class="dropdown_text">usd</div>
-                    <div class="dropdown_arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                <!-- Slide -->
+                <div class="owl-item">
+                    <div class="background_image" style="background-image:url(customer/images/home_slider_1.jpg)"></div>
+                    <div class="home_content_container">
+                        <div class="home_content">
+                            <div class="home_discount d-flex flex-row align-items-end justify-content-start">
+                                <div class="home_discount_num">20</div>
+                                <div class="home_discount_text">Discount on the</div>
+                            </div>
+                            <div class="home_title">New Collection</div>
+                            <div class="button button_1 home_button trans_200"><a href="categories.html">Shop NOW!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- Currencies Dropdown Menu -->
-                    <ul>
-                        <li><a href="#">
-                            <div class="dropdown_text">EUR</div>
-                        </a></li>
-                        <li><a href="#">
-                            <div class="dropdown_text">YEN</div>
-                        </a></li>
-                        <li><a href="#">
-                            <div class="dropdown_text">GBP</div>
-                        </a></li>
-                        <li><a href="#">
-                            <div class="dropdown_text">CAD</div>
-                        </a></li>
-                    </ul>
-
+                <!-- Slide -->
+                <div class="owl-item">
+                    <div class="background_image" style="background-image:url(customer/images/home_slider_1.jpg)"></div>
+                    <div class="home_content_container">
+                        <div class="home_content">
+                            <div class="home_discount d-flex flex-row align-items-end justify-content-start">
+                                <div class="home_discount_num">20</div>
+                                <div class="home_discount_text">Discount on the</div>
+                            </div>
+                            <div class="home_title">New Collection</div>
+                            <div class="button button_1 home_button trans_200"><a href="categories.html">Shop NOW!</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
+
+            <!-- Home Slider Navigation -->
+            <div class="home_slider_nav home_slider_prev trans_200">
+                <div class=" d-flex flex-column align-items-center justify-content-center"><img src="customer/images/prev.png"
+                                                                                                alt=""></div>
+            </div>
+            <div class="home_slider_nav home_slider_next trans_200">
+                <div class=" d-flex flex-column align-items-center justify-content-center"><img src="customer/images/next.png"
+                                                                                                alt=""></div>
+            </div>
+
         </div>
+    </div>
 
-        <!-- Logo -->
-        <div class="sidebar_logo">
-            <a href="#">
-                <div>a<span>star</span></div>
-            </a>
-        </div>
+</th:block>
+<th:block th:fragment="header_content">
 
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar_nav">
-            <ul>
-                <li><a href="index.html">home<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                <li><a href="#">woman<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                <li><a href="#">man<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                <li><a href="#">lookbook<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                <li><a href="blog.html">blog<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                <li><a href="#">contact<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-            </ul>
-        </nav>
+    <!-- Home -->
 
-        <!-- Search -->
-        <div class="search">
-            <form action="#" class="search_form" id="sidebar_search_form">
-                <input type="text" class="search_input" placeholder="Search" required="required">
-                <button class="search_button"><i class="fa fa-search" aria-hidden="true"></i></button>
-            </form>
-        </div>
-
-        <!-- Cart -->
-        <div class="cart d-flex flex-row align-items-center justify-content-start">
-            <div class="cart_icon"><a href="cart.html">
-                <img src="customer/images/bag.png" alt="">
-                <div class="cart_num">2</div>
-            </a></div>
-            <div class="cart_text">bag</div>
-            <div class="cart_price">$39.99 (1)</div>
+    <div class="home">
+        <div class="parallax_background parallax-window" data-parallax="scroll"
+             data-image-src="customer/images/categories.jpg" data-speed="0.8"></div>
+        <div class="home_container">
+            <div class="home_content">
+                <div class="home_title">Shop</div>
+                <div class="breadcrumbs">
+                    <ul class="d-flex flex-row align-items-center justify-content-start">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Woman</a></li>
+                        <li>Accessories</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 

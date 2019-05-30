@@ -28,6 +28,10 @@ public class BaseController {
         return baseService.setViewName("customer/index");
     }
 
+    @RequestMapping(value = { "/categories" }, method = RequestMethod.GET) public ModelAndView categories() {
+        return baseService.setViewName("customer/categories");
+    }
+
     @RequestMapping(value = { "admin" }, method = RequestMethod.GET) public ModelAndView index() {
         return baseService.setViewName("admin/index");
     }
@@ -38,10 +42,6 @@ public class BaseController {
 
     @RequestMapping(value = { "/access-denied" }, method = RequestMethod.GET) public ModelAndView accessDenied() {
         return baseService.setViewName("access-denied");
-    }
-
-    @RequestMapping(value = { "/register" }, method = RequestMethod.GET) public ModelAndView register() {
-        return baseService.setViewName("admin/register");
     }
 
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET) public ModelAndView login() {
